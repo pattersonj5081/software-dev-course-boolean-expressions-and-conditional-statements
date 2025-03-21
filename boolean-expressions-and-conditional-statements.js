@@ -29,18 +29,55 @@ const readline = require('readline-sync');
 const hasTorch = true;
 const hasMap = false;
 
+  let playerGems = 150; // Example starting gems
+  
+  const wares = {
+    coat: 50,
+    water: 50,
+    sword: 100,
+    compass: 100
+  };
+  console.log ("Before you begin your journey, please know it will be perilous.") 
+  const choice1 = readline.question('Would you like to purchase something? (yes/no): ');
+  
+  if (choice1 === 'yes') {
+    console.log('Wares:');
+    for (const [item, cost] of Object.entries(wares)) {
+      console.log(`${item} - ${cost} gems`);
+    }
+  
+    const itemChoice = readline.question('What would you like to purchase? ');
+  
+    if (wares[itemChoice] !== undefined) {
+      const itemCost = wares[itemChoice];
+      if (playerGems >= itemCost) {
+        playerGems -= itemCost;
+        console.log('Great choice!');
+        console.log(`You have ${playerGems} gems remaining.`);
+      } else {
+        console.log("You don't have enough gems for this item.");
+      }
+    } else {
+      console.log('Invalid item selected.');
+    }
+  } else {
+    console.log('Good luck on your journey!');
+  }
+  
 console.log("You see two paths: one leads to the mountains, the other to the village.");
-const choice = readline.question("Do you go to the 'mountains' or the 'village'?");
+const choice2 = readline.question("Do you go to the 'mountains' or the 'village'?");
 
-if (choice === "mountains" && hasTorch) {
+if (choice2 === "mountains" && hasTorch) {
   console.log("You safely navigate through the dark mountains.");
-} else if (choice === "mountains" && !hasTorch) {
+} else if (choice2 === "mountains" && !hasTorch) {
   console.log("It's too dark to proceed. You decide to turn back.");
-} else if (choice === "village" || hasMap) {
+  
+} else if (choice2 === "village" || hasMap) {
   console.log("You find your way to the village.");
 } else {
   console.log("You get lost and wander aimlessly.");
 }
+
 
 /* 
 
